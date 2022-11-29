@@ -1,7 +1,47 @@
+import { useRef, useState } from "react";
+
 const AddTask = () => {
+  // State Declaration
+  const [task, setTask] = useState(""); // returns an array
+
+  // Creating input reference variable
+  const inputRef = useRef(null); // returns an object
+
+  // Handling Add Task Event
+  const addTaskHandler = (e) => {
+    e.preventDefault();
+
+    // Post Task Into Server
+    taskPosting(task);
+
+    inputRef.current.blur();
+    setTask("");
+  };
+
+  // Creating a function for posting task to the server
+  const taskPosting = async (text) => {
+    const res = await fetch(
+      "https://aluminum-delicate-snowshoe.glitch.me/tasks",
+      {
+        method: "POST",
+        headers: {
+          " Content-type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      }
+    );
+  };
+
   return (
-    <form className="bg-blue-500 container mx-auto flex justify-between p-10">
+    <form
+      className="bg-blue-500 container mx-auto flex justify-between p-10 "
+      onSubmit={addTaskHandler}
+    >
       <input
+        ref={inputRef}
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+        required
         type="text"
         placeholder="What needs to be done?"
         className="bg-transparent outline-none border-b-2 py-2 px-5 placeholder-gray-700 border-gray-700 focus:border-blue-700"
