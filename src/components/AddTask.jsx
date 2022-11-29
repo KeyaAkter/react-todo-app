@@ -1,6 +1,6 @@
 const AddTask = () => {
   return (
-    <form className="bg-blue-400 container mx-auto flex justify-between p-10">
+    <form className="bg-blue-500 container mx-auto flex justify-between p-10">
       <input
         type="text"
         placeholder="What needs to be done?"
