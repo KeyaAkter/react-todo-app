@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import AddTask from "./components/AddTask";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
+
+// Creating Delete Context
+export const DeleteHandlerContext = createContext();
 
 const App = () => {
   // Declaring state to set multiple task
@@ -32,12 +35,33 @@ const App = () => {
     }
   };
 
+  // Delete Event
+  const deleteHandler = (id) => {
+    // delete data using id
+    deleteData(id);
+
+    // set updated tasks
+    setTasks(tasks.filter((task) => id !== task.id));
+  };
+
+  // Sending Delete Request
+  const deleteData = async (id) => {
+    await fetch(`https://hallowed-ambitious-mouth.glitch.me/tasks/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  };
+
   return (
     <div className="wrapper bg-gradient-to-t from-blue-700 to-blue-300 min-h-screen text-xl text-gray-900 flex flex-col py-10">
-      <Header />
-      <AddTask tasks={tasks} setTasks={setTasks} />
-      <TaskList tasks={tasks} />
-      <Footer />
+      <DeleteHandlerContext.Provider value={deleteHandler}>
+        <Header />
+        <AddTask tasks={tasks} setTasks={setTasks} />
+        <TaskList tasks={tasks} />
+        <Footer />
+      </DeleteHandlerContext.Provider>
     </div>
   );
 };
