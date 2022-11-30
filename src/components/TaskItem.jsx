@@ -14,7 +14,7 @@ const TaskItem = ({ task }) => {
           <FiEdit className="text-gray-800 hover:text-gray-200 cursor-pointer duration-300 " />
         </span>
         <span>
-          <FiTrash className="text-gray-800 hover:text-red-700 cursor-pointer duration-300" />
+          <FiTrash className="text-gray-800 hover:text-red-600 cursor-pointer duration-300" />
         </span>
       </div>
     </div>
