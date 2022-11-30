@@ -11,6 +11,12 @@ const App = () => {
   // Declaring state to set multiple task
   const [tasks, setTasks] = useState([]);
 
+  // Declaring state for loading data
+  const [loading, setLoading] = useState(true);
+
+  // Declaring state for error data
+  const [error, setError] = useState("");
+
   // Creating a side effect to automatically retrieve data from the server
 
   useEffect(() => {
@@ -30,8 +36,9 @@ const App = () => {
       const data = await res.json();
 
       setTasks(data); // Storing data into tasks
+      setLoading(false); // After getting data loading will become false
     } catch (error) {
-      console.log(error.message);
+      setError(error.message);
     }
   };
 
@@ -59,7 +66,7 @@ const App = () => {
       <DeleteHandlerContext.Provider value={deleteHandler}>
         <Header />
         <AddTask tasks={tasks} setTasks={setTasks} />
-        <TaskList tasks={tasks} />
+        <TaskList tasks={tasks} error={error} loading={loading} />
         <Footer />
       </DeleteHandlerContext.Provider>
     </div>
