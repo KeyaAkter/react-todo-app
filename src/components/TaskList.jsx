@@ -1,6 +1,13 @@
 import TaskItem from "./TaskItem";
 
-const TaskList = ({ tasks, error, loading }) => {
+const TaskList = ({
+  tasks,
+  error,
+  loading,
+  editHandleSubmitter,
+  editedText,
+  setEditedText,
+}) => {
   return (
     <div className="flex flex-col gap-3 bg-blue-500 container mx-auto p-10">
       {/* Implementing Loading */}
@@ -14,7 +21,13 @@ const TaskList = ({ tasks, error, loading }) => {
 
       {/* exporting individual task to the task item */}
       {tasks.map((task) => (
-        <TaskItem task={task} key={task.id} />
+        <TaskItem
+          task={task}
+          key={task.id}
+          editHandleSubmitter={editHandleSubmitter}
+          editedText={editedText}
+          setEditedText={setEditedText}
+        />
       ))}
     </div>
   );
