@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import { DeleteHandlerContext, EditHandlerContext } from "../App";
 
@@ -9,11 +9,19 @@ const TaskItem = ({ task, editHandleSubmitter, editedText, setEditedText }) => {
   // Using Edit Context
   const handleEdit = useContext(EditHandlerContext);
 
+  // Declaring state for checking
+  const [isChecked, setIsChecked] = useState(false);
+
   return (
     <div className="task-item flex justify-between items-center bg-blue-700 p-5 rounded hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-800 tracking-wider group">
       <div className="task-item-left flex gap-3">
         <span>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            className="cursor-pointer"
+            checked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
+          />
         </span>
 
         {task.isEditable && (
@@ -29,7 +37,15 @@ const TaskItem = ({ task, editHandleSubmitter, editedText, setEditedText }) => {
         )}
 
         {!task.isEditable && (
-          <p className="group-hover:text-gray-100">{task.text}</p>
+          <p
+            className={`group-hover:text-gray-100 ${
+              isChecked
+                ? `line-through text-gray-400 group-hover:text-gray-300`
+                : null
+            }`}
+          >
+            {task.text}
+          </p>
         )}
       </div>
 
