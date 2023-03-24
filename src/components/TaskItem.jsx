@@ -51,11 +51,11 @@ const TaskItem = ({ task, editHandleSubmitter, editedText, setEditedText }) => {
 
       <div className="task-item-right flex gap-3">
         <button onClick={() => handleEdit(task.id)}>
-          <FiEdit className="text-gray-800 hover:text-gray-200 cursor-pointer duration-300 " />
+          <FiEdit className="text-gray-700 hover:text-gray-200 cursor-pointer duration-300 " />
         </button>
 
         <button onClick={() => handleDelete(task.id)}>
-          <FiTrash className="text-gray-800 hover:text-red-600 cursor-pointer duration-300" />
+          <FiTrash className="text-gray-700 hover:text-red-600 cursor-pointer duration-300" />
         </button>
       </div>
     </div>

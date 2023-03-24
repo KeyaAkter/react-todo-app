@@ -27,9 +27,8 @@ const App = () => {
   const [toggleEditMode, setToggleEditMode] = useState(true);
 
   // Creating a side effect to automatically retrieve data from the server
-
   useEffect(() => {
-    // Getting data from the server
+    // Receiving data from the server
     receivingData();
   }, []);
 
@@ -44,8 +43,8 @@ const App = () => {
 
       const data = await res.json();
 
-      setTasks(data); // Storing data into tasks
-      setLoading(false); // After getting data loading will become false
+      setTasks(data); // Storing received data into tasks variable
+      setLoading(false); // After getting data, loading will become false
     } catch (error) {
       setError(error.message);
     }
